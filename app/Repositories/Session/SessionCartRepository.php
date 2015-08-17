@@ -55,8 +55,13 @@ class SessionCartRepository implements CartRepositoryContract
 			$total = $total + $product->getSubTotal();
 		}
 
-		// Validate if $total is less than zero and force it to not
-		$total = $total > 0 ? $total : 0;
+		// I could use a ternary operator here like the one commented below
+		// but its harder to read than a simple IF Statement
+		// $total = $total > 0 ? $total : 0;
+		if($total <= 0)
+		{
+			$total = 0;
+		}
 
 		// Return the Formated Number
 		return number_format($total, 2, '.', '');
