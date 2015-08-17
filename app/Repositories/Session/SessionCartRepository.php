@@ -13,7 +13,7 @@ class SessionCartRepository implements CartRepositoryContract
 	protected $session;
 	protected $productRepo;
 	protected $couponRepo;
-	protected $products;
+	private $products;
 
 	public function __construct(SessionContract $session, ProductRepositoryContract $productRepo, CouponRepositoryContract $couponRepo)
 	{

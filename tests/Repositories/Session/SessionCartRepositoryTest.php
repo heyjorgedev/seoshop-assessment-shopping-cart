@@ -11,7 +11,7 @@ class SessionCartRepositoryTest extends TestCase
         Mockery::close();
     }
 
-    public function test_get()
+    public function testGet()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -39,7 +39,7 @@ class SessionCartRepositoryTest extends TestCase
         $this->assertTrue($productCount == 3);
     }
 
-    public function test_get_empty()
+    public function testGetEmpty()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -62,7 +62,7 @@ class SessionCartRepositoryTest extends TestCase
         $this->assertTrue($productCount == 0);
     }
 
-    public function test_add()
+    public function testAdd()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -85,7 +85,7 @@ class SessionCartRepositoryTest extends TestCase
 		$this->assertTrue($result);
     }
 
-    public function test_remove_less_than_zero()
+    public function testRemoveLessThanZero()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -103,7 +103,7 @@ class SessionCartRepositoryTest extends TestCase
 		$this->assertTrue($result);
     }
 
-    public function test_remove_five_from_ten()
+    public function testRemoveFiveFromTen()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -121,7 +121,7 @@ class SessionCartRepositoryTest extends TestCase
 		$this->assertTrue($result);
     }
 
-    public function test_remove_all()
+    public function testRemoveAll()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
@@ -138,7 +138,7 @@ class SessionCartRepositoryTest extends TestCase
 		$this->assertTrue($result);
     }
 
-    public function test_add_discount()
+    public function testAddDiscount()
     {
     	// Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
