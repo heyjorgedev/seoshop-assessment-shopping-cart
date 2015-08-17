@@ -38,7 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         // Cart Repository
         $this->app->bind(
             'App\Repositories\Contracts\CartRepositoryContract', 
-            'App\Repositories\session\SessionCartRepository'
+            'App\Repositories\Session\SessionCartRepository'
         );
     }
 }
