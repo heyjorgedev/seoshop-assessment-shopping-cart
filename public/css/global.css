@@ -1,0 +1,77 @@
+.presentation
+{
+	/*background: url('http://apps.bsv.vcu.edu/RamTech/img/new-slider4.jpg') center -100px;*/
+}
+
+.thumbnail,
+.well,
+.btn,
+.form-control
+{
+	border-radius: 0;
+}
+
+.cart-table > tbody > tr > td
+{
+	line-height: 50px;
+}
+.cart-table > tbody > tr > td > .form-numeric-value-group
+{
+    margin-top: 8px;
+}
+
+.form-numeric-value-group
+{
+}
+
+.form-numeric-value-group .buttons
+{
+	width:17px;
+	height:34px;
+	background: #fff;
+	border:1px #ccc solid;
+	border-left: none;
+	float:left;
+}
+
+.form-numeric-value-group .buttons .button,
+.form-numeric-value-group .buttons .button:link,
+.form-numeric-value-group .buttons .button:focus
+{
+	width: 16px;
+	height: 15px;
+	float:left;
+	margin:0;
+	background: #fff;
+	line-height: 17px;
+	text-align: center;
+	border:0;
+	padding: 0;
+	color:#000;
+	text-decoration: none;
+}
+
+.form-numeric-value-group .buttons .button:first-child
+{
+	border-bottom:1px #ccc solid;
+	height: 17px;
+}
+
+.form-numeric-value-group .buttons .button:hover,
+.form-numeric-value-group .buttons .button:active
+{
+	color:#000;
+	background: #ccc;
+	text-decoration: none;
+}
+
+.form-numeric-value-group input
+{
+	float:left;
+	width: 80px;
+}
+
+.form-numeric-value-group .buttons
+{
+	
+}
