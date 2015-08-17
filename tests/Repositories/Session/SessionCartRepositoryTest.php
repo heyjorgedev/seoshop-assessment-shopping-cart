@@ -64,7 +64,7 @@ class SessionCartRepositoryTest extends TestCase
 
     public function testAdd()
     {
-    	// Arrange
+        // Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
         $mockCouponRepository = Mockery::mock('App\Repositories\Contracts\CouponRepositoryContract');
         $mockSession = Mockery::mock('Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -79,15 +79,15 @@ class SessionCartRepositoryTest extends TestCase
         $mockSession->shouldReceive('put')->once()->with('cart.products.1', 15); 
 
         // Act
-		$result = $sessionCartRepository->add(1, 10);
+        $result = $sessionCartRepository->add(1, 10);
 
-		// Assert
-		$this->assertTrue($result);
+        // Assert
+        $this->assertTrue($result);
     }
 
     public function testRemoveLessThanZero()
     {
-    	// Arrange
+        // Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
         $mockCouponRepository = Mockery::mock('App\Repositories\Contracts\CouponRepositoryContract');
         $mockSession = Mockery::mock('Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -97,15 +97,15 @@ class SessionCartRepositoryTest extends TestCase
         $mockSession->shouldReceive('remove')->once()->with('cart.products.1');
 
         // Act
-		$result = $sessionCartRepository->remove(1, 10);
+        $result = $sessionCartRepository->remove(1, 10);
 
-		// Assert
-		$this->assertTrue($result);
+        // Assert
+        $this->assertTrue($result);
     }
 
     public function testRemoveFiveFromTen()
     {
-    	// Arrange
+        // Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
         $mockCouponRepository = Mockery::mock('App\Repositories\Contracts\CouponRepositoryContract');
         $mockSession = Mockery::mock('Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -115,15 +115,15 @@ class SessionCartRepositoryTest extends TestCase
         $mockSession->shouldReceive('put')->once()->with('cart.products.1', 5);
 
         // Act
-		$result = $sessionCartRepository->remove(1, 5);
+        $result = $sessionCartRepository->remove(1, 5);
 
-		// Assert
-		$this->assertTrue($result);
+        // Assert
+        $this->assertTrue($result);
     }
 
     public function testRemoveAll()
     {
-    	// Arrange
+        // Arrange
         $mockProductsRepository = Mockery::mock('App\Repositories\Contracts\ProductRepositoryContract');
         $mockCouponRepository = Mockery::mock('App\Repositories\Contracts\CouponRepositoryContract');
         $mockSession = Mockery::mock('Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -132,10 +132,10 @@ class SessionCartRepositoryTest extends TestCase
         $mockSession->shouldReceive('remove')->once()->with('cart.products.1');
 
         // Act
-		$result = $sessionCartRepository->remove(1);
+        $result = $sessionCartRepository->remove(1);
 
-		// Assert
-		$this->assertTrue($result);
+        // Assert
+        $this->assertTrue($result);
     }
 
     public function testAddDiscount()
