@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CartControllerTest extends TestCase
 {
-    public function test_post_add_action()
+    public function testPostAddAction()
     {
         
     }

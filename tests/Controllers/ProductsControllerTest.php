@@ -11,7 +11,7 @@ class ProductsControllerTest extends TestCase
         Mockery::close();
     }
 
-    public function test_get_index_action()
+    public function testGetIndexAction()
     {
         // Arrange
         $products = factory(App\Models\Product::class, 10)->make();
