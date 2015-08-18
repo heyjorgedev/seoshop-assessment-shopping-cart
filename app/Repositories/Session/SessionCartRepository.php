@@ -19,7 +19,7 @@ class SessionCartRepository implements CartRepositoryContract
 	 * Check if the Product Exists
 	 * @param  int $productId ID of the Product
 	 */
-	public function productExists($productId)
+	public function hasProduct($productId)
 	{
 		return $this->session->has($this->getProductSessionKey($productId));
 	}

@@ -15,6 +15,6 @@ interface CartRepositoryContract
 	public function addProduct($productId, $quantity);
 	public function removeProduct($productId);
 	public function updateProduct($productId, $quantity);
-	public function productExists($productId);
+	public function hasProduct($productId);
 	public function getProductQuantity($productId);
 }
