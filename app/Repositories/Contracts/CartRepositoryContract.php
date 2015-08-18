@@ -4,13 +4,17 @@ namespace App\Repositories\Contracts;
 
 interface CartRepositoryContract
 {
-	public function getProducts();
+	// Discounts
 	public function getDiscounts();
 	public function addDiscount($couponId);
+	public function discountCouponExists($couponId);
+	public function removeDiscount($couponId);
 
-	public function productExists($productId);
-	public function getProductQuantity($productId);
-	public function updateProduct($productId, $quantity);
+	// Products
+	public function getProducts();
 	public function addProduct($productId, $quantity);
 	public function removeProduct($productId);
+	public function updateProduct($productId, $quantity);
+	public function productExists($productId);
+	public function getProductQuantity($productId);
 }
