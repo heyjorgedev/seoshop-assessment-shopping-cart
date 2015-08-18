@@ -1,3 +1,3 @@
-@inject('cartRepo', 'App\Repositories\Contracts\CartRepositoryContract')
+@inject('cartService', 'App\Services\Contracts\CartServiceContract')
 
-<li><a href="{{ action('CartController@getIndex') }}">My Cart <b>({{ $cartRepo->getProductCount() }})</b></a></li>
+<li><a href="{{ action('CartController@getIndex') }}">My Cart <b>({{ $cartService->getProductsCount() }})</b></a></li>

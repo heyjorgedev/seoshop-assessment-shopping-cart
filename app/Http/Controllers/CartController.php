@@ -5,23 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\CartRepositoryContract as CartRepository;
+use App\Services\Contracts\CartServiceContract;
 use App\Http\Requests\AddProductToCartRequest;
 use App\Http\Requests\AddDiscountToCartRequest;
 
 class CartController extends Controller
 {
-	protected $cartRepo;
+    protected $cartRepo;
+	protected $cartService;
 
-	public function __construct(CartRepository $cartRepo)
+	public function __construct(CartServiceContract $cartService)
 	{
-		$this->cartRepo = $cartRepo;
+        $this->cartService = $cartService;
 	}
 
     public function getIndex()
     {
-        // Get all cart items (products, discounts, total) from the Repository
-    	$cart = $this->cartRepo->get();
+        // Get all cart items (products, discounts, total) from the Cart Service
+    	$cart = $this->cartService->get();
 
         // Return it to the view
     	return view('cart.index', compact('cart'));
@@ -32,8 +33,8 @@ class CartController extends Controller
         // Get the Quantity from the POST request.
         $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
 
-        // Call the Repository to add this item to the Cart
-        $this->cartRepo->add($id, $quantity);
+        // Call the Cart Service to add this item to the Cart
+        $this->cartService->addProduct($id, $quantity);
 
         // Return the user Back
         return back();
@@ -44,8 +45,8 @@ class CartController extends Controller
         // Get the Quantity from the POST request.
         $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
 
-        // Call the Repository to add this item to the Cart
-        $this->cartRepo->remove($id, $quantity);
+        // Call the Cart Service to remove this item from the Cart
+        $this->cartService->removeProduct($id, $quantity);
 
         // Return the user Back
         return back();
@@ -53,9 +54,9 @@ class CartController extends Controller
 
     public function postAddDiscount($id, AddDiscountToCartRequest $request)
     {
-        $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
-        $this->cartRepo->add($id, $quantity);
-        return back();
+        // $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
+        // $this->cartRepo->add($id, $quantity);
+        // return back();
     }
 
     public function getCheckout()
