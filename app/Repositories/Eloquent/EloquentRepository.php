@@ -18,6 +18,11 @@ class EloquentRepository implements RepositoryContract
 		return $this->model->findOrFail($id);
 	}
 
+	public function has($id)
+	{
+		return !is_null($this->model->find($id));
+	}
+
 	public function getIn(array $array)
 	{
 		return $this->model->whereIn('id', $array)->get();

@@ -6,9 +6,9 @@ interface CartRepositoryContract
 {
 	// Discounts
 	public function getDiscounts();
-	public function addDiscount($couponId);
-	public function discountCouponExists($couponId);
-	public function removeDiscount($couponId);
+	public function addDiscountCoupon($couponId);
+	public function hasDiscountCoupon($couponId);
+	public function removeDiscountCoupon($couponId);
 
 	// Products
 	public function getProducts();

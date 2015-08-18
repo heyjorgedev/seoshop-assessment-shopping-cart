@@ -108,6 +108,10 @@ class CartService implements CartServiceContract
 	{
 		if(isset($this->discounts)) return $this->discounts;
 		else $this->discounts = [];
+
+		// @todo: 
+
+		return $this->discounts;
 	}
 
 	/**
@@ -126,14 +130,19 @@ class CartService implements CartServiceContract
 			$this->total += $product->getSubTotal();
 		}
 
-		// @todo Go to each discount and calculate the value
+		// @todo: Go to each discount and calculate the value
 		
+		// First the value discounts
+		
+		// Second the percentage discounts
 
 		// I could use a ternary operator here like the one commented below
 		// but its harder to read than a simple IF Statement
 		// $this->total = $this->total > 0 ? $this->total : 0;
 		if($this->total <= 0)
 		{
+			// I don't know if it is right but I think the merchant would prefer to give a free item
+			// rather than having to pay a negative value
 			$this->total = intval(0);
 		}
 
@@ -156,7 +165,11 @@ class CartService implements CartServiceContract
 			$this->cartRepository->updateProduct($productId, $newQuantity);
 			return true;
 		}
+
+		// Verify if product exists
+		if($this->productRepository->has($productId) == false) return false; // Throw exception
 		
+		// Only add the product if it exists in the datastore
 		$this->cartRepository->addProduct($productId, $quantity);
 		return true;
 	}
@@ -185,11 +198,26 @@ class CartService implements CartServiceContract
 
 	public function addCoupon($couponId)
 	{
+		if($this->cartRepository->hasDiscountCoupon($couponId))
+		{
+			return false;
+		}
 
+		if($this->couponRepository->has($couponId))
+		{
+			$this->cartRepository->addDiscountCoupon($couponId);
+			return true;
+		}
 	}
 
 	public function removeCoupon($couponId)
 	{
+		if($this->cartRepository->hasDiscountCoupon($couponId))
+		{
+			$this->cartRepository->removeDiscountCoupon($couponId);
+			return true;
+		}
 
+		return false;
 	}
 }

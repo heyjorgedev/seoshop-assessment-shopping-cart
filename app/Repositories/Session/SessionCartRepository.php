@@ -82,25 +82,23 @@ class SessionCartRepository implements CartRepositoryContract
 	 * Add a Discount Coupon
 	 * @param int $couponId ID of the Coupon
 	 */
-	public function addDiscount($couponId)
+	public function addDiscountCoupon($couponId)
 	{
-		$this->session->put($this->getDiscountSessionKey($couponId), 0);
+		$coupons = $this->session->get('cart.discounts', []);
+		array_push($coupons, $couponId);
+		$this->session->put('cart.discounts', $coupons);
 	}
 
 	/**
 	 * Remove a Discount Coupon
 	 * @param  int $couponId ID of the Coupon
 	 */
-	public function removeDiscount($couponId)
+	public function removeDiscountCoupon($couponId)
 	{
-		// Get the Discounts
-		$discounts = $this->getDiscounts();
-
-		// Verify if the Discount Already Exists
-		if(array_key_exists($couponId, $discounts))
-			return false;
-
-		return true;
+		$coupons = $this->session->get('cart.discounts', []);
+		$key = array_search($couponId, $coupons);
+		unset($coupons[$key]);
+		$this->session->put('cart.discounts', $coupons);
 	}
 
 	/**
@@ -108,9 +106,9 @@ class SessionCartRepository implements CartRepositoryContract
 	 * @param  int $couponId ID of the Coupon
 	 * @return [type]           [description]
 	 */
-	public function discountCouponExists($couponId)
+	public function hasDiscountCoupon($couponId)
 	{
-		return true;
+		return in_array($couponId, $this->session->get('cart.discounts', []));
 	}
 
 	private function getProductSessionKey($productId)
