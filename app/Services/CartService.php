@@ -24,7 +24,7 @@ class CartService implements CartServiceContract
 
 	public function get()
 	{
-		return [
+		return (object)[
 			'products'	=> $this->getProducts(),
 			'discounts'	=> $this->getDiscounts(),
 			'total'		=> $this->getTotal()

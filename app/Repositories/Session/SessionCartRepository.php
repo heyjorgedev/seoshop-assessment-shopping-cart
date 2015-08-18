@@ -15,42 +15,58 @@ class SessionCartRepository implements CartRepositoryContract
 		$this->session = $session;
 	}
 
+	/**
+	 * Check if the Product Exists
+	 * @param  int $productId ID of the Product
+	 */
 	public function productExists($productId)
 	{
 		return $this->session->has($this->getProductSessionKey($productId));
 	}
 
+	/**
+	 * Get the Product Quantity by Id
+	 * @param  [type] $productId [description]
+	 * @return [type]            [description]
+	 */
 	public function getProductQuantity($productId)
 	{
 		return $this->session->get($this->getProductSessionKey($productId), 0);
 	}
 
+	/**
+	 * Update the Product by Id with a quantity
+	 * @param  int $productId ID of the Product
+	 * @param  int $quantity  Quantity of the Product
+	 */
 	public function updateProduct($productId, $quantity)
 	{
 		$this->session->put($this->getProductSessionKey($productId), $quantity);
 	}
 
+	/**
+	 * Add a new Product
+	 * @param int $productId ID of the Product
+	 * @param int $quantity  Quantity of the Product
+	 */
 	public function addProduct($productId, $quantity)
 	{
 		$this->session->put($this->getProductSessionKey($productId), $quantity);
 	}
 
+	/**
+	 * Remove a Product
+	 * @param  int $productId ID of the Product
+	 */
 	public function removeProduct($productId)
 	{
 		$this->session->forget($this->getProductSessionKey($productId));
 	}
 
-
-	private function getProductSessionKey($productId)
-	{
-		return 'cart.products.'.$productId;
-	}
-
-	private function getDiscountSessionKey($couponId)
-	{
-		return 'cart.discounts.'.$couponId;
-	}
-
+	/**
+	 * Get all products in the session
+	 * @return array Products array with quantity
+	 */
 	public function getProducts()
 	{
 		return $this->session->get('cart.products', []);
@@ -62,11 +78,19 @@ class SessionCartRepository implements CartRepositoryContract
 		return $this->session->get('cart.discounts', []); // Default value is an empty array
 	}
 
+	/**
+	 * Add a Discount Coupon
+	 * @param int $couponId ID of the Coupon
+	 */
 	public function addDiscount($couponId)
 	{
 		$this->session->put($this->getDiscountSessionKey($couponId), 0);
 	}
 
+	/**
+	 * Remove a Discount Coupon
+	 * @param  int $couponId ID of the Coupon
+	 */
 	public function removeDiscount($couponId)
 	{
 		// Get the Discounts
@@ -79,8 +103,23 @@ class SessionCartRepository implements CartRepositoryContract
 		return true;
 	}
 
+	/**
+	 * Check if the Product Exists
+	 * @param  int $couponId ID of the Coupon
+	 * @return [type]           [description]
+	 */
 	public function discountCouponExists($couponId)
 	{
 		return true;
+	}
+
+	private function getProductSessionKey($productId)
+	{
+		return 'cart.products.'.$productId;
+	}
+
+	private function getDiscountSessionKey($couponId)
+	{
+		return 'cart.discounts.'.$couponId;
 	}
 }

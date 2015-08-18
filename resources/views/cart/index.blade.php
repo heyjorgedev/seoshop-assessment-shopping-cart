@@ -3,15 +3,15 @@
 @section('content')
 	<h1 style="margin-bottom: 30px;">My Cart</h1>
 	
-	@if(empty($cart['products']))
+	@if(empty($cart->products))
 		<p>You have no items in your shopping cart.</p>
 	@else
 		
-		@include('cart.partials.products-table', [ 'products' => $cart['products']])
+		@include('cart.partials.products-table', [ 'products' => $cart->products])
 		
-		@include('cart.partials.discounts-table', [ 'discounts' => $cart['discounts']])
+		@include('cart.partials.discounts-table', [ 'discounts' => $cart->discounts])
 		
-		<h2 style="text-align: right;">Total: {{ $cart['total'] }}€</h2>
+		<h2 style="text-align: right;">Total: {{ $cart->total }}€</h2>
 
 		<div> <!-- TODO: Coupons -->
 
