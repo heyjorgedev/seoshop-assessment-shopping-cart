@@ -46,10 +46,9 @@ class SessionCartRepository implements CartRepositoryContract
 		return 'cart.products.'.$productId;
 	}
 
-
-	public function getProductsCount()
+	private function getDiscountSessionKey($couponId)
 	{
-		return array_sum($this->session->get('cart.products', []));
+		return 'cart.discounts.'.$couponId;
 	}
 
 	public function getProducts()
@@ -65,6 +64,11 @@ class SessionCartRepository implements CartRepositoryContract
 
 	public function addDiscount($couponId)
 	{
+		$this->session->put($this->getDiscountSessionKey($couponId), 0);
+	}
+
+	public function removeDiscount($couponId)
+	{
 		// Get the Discounts
 		$discounts = $this->getDiscounts();
 
@@ -72,6 +76,11 @@ class SessionCartRepository implements CartRepositoryContract
 		if(array_key_exists($couponId, $discounts))
 			return false;
 
+		return true;
+	}
+
+	public function discountCouponExists($couponId)
+	{
 		return true;
 	}
 }
