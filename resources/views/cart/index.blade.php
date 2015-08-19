@@ -19,8 +19,8 @@
 		</div>
 
 		<div style="clear:both;height:30px;"></div>
-		
-		<h2 style="text-align: right;">Total: {{ $cart->total }}€</h2>
+
+		<h2 style="text-align: left;">Total: {{ $cart->total }}€</h2>
 		
 		<div>
 			<a href="{{ action('CartController@getCheckout') }}" class="btn btn-lg btn-success">Checkout</a>
