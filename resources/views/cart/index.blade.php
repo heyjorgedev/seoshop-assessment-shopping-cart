@@ -15,11 +15,12 @@
 
 		<div> <!-- TODO: Coupons -->
 			{!! Form::open([ 'url' => '']) !!}
-				<input class="form-control" placeholder="" type="text">
-				<button class="btn btn-default" type="submit">Add Coupon</button>
+				<input class="form-control" style="float:left;width:150px;" placeholder="" type="text">
+				<button class="btn btn-default" style="float:left; margin-left:10px;" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>
 
+		<div style="clear:both;"></div>
 		<div>
 			<a href="{{ action('CartController@getCheckout') }}" class="btn btn-lg btn-success">Checkout</a>
 		</div>
