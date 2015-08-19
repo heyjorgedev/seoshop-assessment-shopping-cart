@@ -27,7 +27,7 @@
 							</div>
 						</div>
 					</td>
-					<td>{{ $product->unit_price }}€</td>
+					<td>{{ $product->unitPrice }}€</td>
 					<td>{{ $product->getSubTotal() }}€</td>
 				</tr>
 				@endforeach
