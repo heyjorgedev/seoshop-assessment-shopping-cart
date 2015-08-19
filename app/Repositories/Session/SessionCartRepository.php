@@ -111,6 +111,11 @@ class SessionCartRepository implements CartRepositoryContract
 		return in_array($couponId, $this->session->get('cart.discounts', []));
 	}
 
+	public function clearDiscountCoupons()
+	{
+		$this->session->forget('cart.discounts');
+	}
+
 	private function getProductSessionKey($productId)
 	{
 		return 'cart.products.'.$productId;
@@ -120,4 +125,6 @@ class SessionCartRepository implements CartRepositoryContract
 	{
 		return 'cart.discounts.'.$couponId;
 	}
+
+
 }

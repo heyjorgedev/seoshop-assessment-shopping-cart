@@ -11,16 +11,17 @@
 		
 		@include('cart.partials.discounts-table', [ 'discounts' => $cart->discounts])
 		
-		<h2 style="text-align: right;">Total: {{ $cart->total }}€</h2>
-
 		<div> <!-- TODO: Coupons -->
-			{!! Form::open([ 'url' => '']) !!}
-				<input class="form-control" style="float:left;width:150px;" placeholder="" type="text">
-				<button class="btn btn-default" style="float:left; margin-left:10px;" type="submit">Add Coupon</button>
+			{!! Form::open([ 'url' => '', 'method' => 'POST']) !!}
+				<input class="form-control" style="float:left;width:200px;" placeholder="" type="text">
+				<button class="btn btn-default" style="float:left; margin-left:-1px;" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>
 
-		<div style="clear:both;"></div>
+		<div style="clear:both;height:30px;"></div>
+		
+		<h2 style="text-align: right;">Total: {{ $cart->total }}€</h2>
+		
 		<div>
 			<a href="{{ action('CartController@getCheckout') }}" class="btn btn-lg btn-success">Checkout</a>
 		</div>

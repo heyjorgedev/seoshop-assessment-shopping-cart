@@ -189,6 +189,10 @@ class CartService implements CartServiceContract
 		if($newQuantity <= intval(0))
 		{
 			$this->cartRepository->removeProduct($productId);
+
+			if($this->getProductsCount() == 0)
+				$this->cartRepository->clearDiscountCoupons();
+
 			return true;
 		}
 
