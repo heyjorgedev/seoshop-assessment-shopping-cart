@@ -14,11 +14,11 @@
 		<div> <!-- TODO: Coupons -->
 			{!! Form::open([ 'url' => '', 'method' => 'POST']) !!}
 				<input class="form-control" style="float:left;width:200px;" placeholder="" type="text">
-				<button class="btn btn-default" style="float:left; margin-left:-1px;" type="submit">Add Coupon</button>
+				<button class="btn btn-primary" style="float:left; margin-left:-1px;" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>
 
-		<div style="clear:both;height:30px;"></div>
+		<div style="clear:both;"></div>
 
 		<h2 style="text-align: left;">Total: {{ $cart->total }}€</h2>
 		
