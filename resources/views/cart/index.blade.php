@@ -15,7 +15,7 @@
 
 		<div> <!-- TODO: Coupons -->
 			{!! Form::open([ 'url' => '']) !!}
-				<input class="form-control" type="text">
+				<input class="form-control" placeholder="" type="text">
 				<button class="btn btn-default" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>

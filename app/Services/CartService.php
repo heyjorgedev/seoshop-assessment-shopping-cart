@@ -41,7 +41,7 @@ class CartService implements CartServiceContract
 
 	/**
 	 * Get Cart Products, Discounts and Total
-	 * @return object Object with the cart values
+	 * @return object
 	 */
 	public function get()
 	{
@@ -54,13 +54,12 @@ class CartService implements CartServiceContract
 
 	/**
 	 * Get the Cart current products mapped with the ProductRepository
-	 * @return array Array of App\Models\CartItem
+	 * @return array
 	 */
 	public function getProducts()
 	{
 		// Local "Caching"
-		if(isset($this->products)) return $this->products;
-		else $this->products = [];
+		$productsArray = [];
 
 		// Get the Session Products
 		$cartProducts = $this->cartRepository->getProducts();
@@ -74,16 +73,16 @@ class CartService implements CartServiceContract
 		foreach($products as $product)
 		{
 			$cartItem = CartItem::create($product->id, $product->title, $cartProducts[$product->id], $product->price);
-			array_push($this->products, $cartItem);
+			array_push($productsArray, $cartItem);
 		}
 
 		// Return the Database Products
-		return $this->products;
+		return $productsArray;
 	}
 
 	/**
 	 * Get the count of the products in the cart.
-	 * @return int Product Count
+	 * @return int
 	 */
 	public function getProductsCount()
 	{
@@ -116,18 +115,17 @@ class CartService implements CartServiceContract
 
 	/**
 	 * Calculates the Total value of the products with the coupon discounts
-	 * @return decimal Total Value
+	 * @return decimal
 	 */
 	public function getTotal()
 	{
-		// Local "Caching" so it doesnt need to recalculate
-		if(isset($this->total)) return $this->total;
-		else $this->total = 0;
+		// Initialize the Variable as Zero.
+		$total = 0;
 
 		// Go to each product and sum the value
 		foreach($this->getProducts() as $product)
 		{
-			$this->total += $product->getSubTotal();
+			$total += $product->getSubTotal();
 		}
 
 		// @todo: Go to each discount and calculate the value
@@ -138,24 +136,25 @@ class CartService implements CartServiceContract
 
 		// I could use a ternary operator here like the one commented below
 		// but its harder to read than a simple IF Statement
-		// $this->total = $this->total > 0 ? $this->total : 0;
-		if($this->total <= 0)
+		// $total = $total > 0 ? $total : 0;
+		if($total <= 0)
 		{
 			// I don't know if it is right but I think the merchant would prefer to give a free item
 			// rather than having to pay a negative value
-			$this->total = intval(0);
+			$total = intval(0);
 		}
 
-		$this->total = number_format($this->total, 2, '.', '');
+		$total = number_format($total, 2, '.', '');
 
 		// Return the Formated Number
-		return $this->total;
+		return $total;
 	}
 
 	/**
 	 * Add a new Product to the Cart
-	 * @param int $productId ID of the Product
-	 * @param int $quantity  Quantity of the Product
+	 * @param int $productId
+	 * @throws \App\Services\Exceptions\ProductNotFoundException if the product is not found in the datastore
+	 * @param int $quantity
 	 */
 	public function addProduct($productId, $quantity)
 	{
@@ -167,7 +166,8 @@ class CartService implements CartServiceContract
 		}
 
 		// Verify if product exists
-		if($this->productRepository->has($productId) == false) return false; // Throw exception
+		if($this->productRepository->has($productId) == false)
+			throw new \App\Services\Exceptions\ProductNotFoundException();
 		
 		// Only add the product if it exists in the datastore
 		$this->cartRepository->addProduct($productId, $quantity);
@@ -176,9 +176,9 @@ class CartService implements CartServiceContract
 
 	/**
 	 * Remove the entire Product from the Cart or just a quantity of it
-	 * @param  int $productId ID of the Product
-	 * @param  int $quantity Quantity of the Product
-	 * @return boolean Result
+	 * @param  int $productId
+	 * @param  int $quantity
+	 * @return boolean
 	 */
 	public function removeProduct($productId, $quantity)
 	{
@@ -196,28 +196,50 @@ class CartService implements CartServiceContract
 		return true;
 	}
 
+	/**
+	 * Add a Discount Coupon to the Cart
+	 * @param int $couponId
+	 * @throws \App\Services\Exceptions\CouponAlreadyExistsException if the coupon already exists in the datastore
+	 * @throws \App\Services\Exceptions\CouponNotFoundException if the coupon is not found in the datastore
+	 * @return boolean
+	 */
 	public function addCoupon($couponId)
 	{
+		// Verify if the Coupon already exists
 		if($this->cartRepository->hasDiscountCoupon($couponId))
 		{
-			return false;
+			// If it does, it violates the rule and Exception should be thrown
+			throw new \App\Services\Exceptions\CouponAlreadyExistsException();
 		}
 
+		// Verify if it exsits in the datastore
 		if($this->couponRepository->has($couponId))
 		{
+			// Add the discount and return true as a Result
 			$this->cartRepository->addDiscountCoupon($couponId);
 			return true;
 		}
+
+		// Throw an Exception if we can't find the Coupon in the Datastore
+		throw new \App\Services\Exceptions\CouponNotFoundException();
 	}
 
+	/**
+	 * Remove a Discount Coupon from the Cart
+	 * @param  int $couponId
+	 * @return boolean
+	 */
 	public function removeCoupon($couponId)
 	{
+		// Verify if the cart already has the discount coupon
 		if($this->cartRepository->hasDiscountCoupon($couponId))
-		{
+		{	
+			// if it has we just need to delete it
 			$this->cartRepository->removeDiscountCoupon($couponId);
 			return true;
 		}
 
+		// If we cant find it we dont need to take any action
 		return false;
 	}
 }
