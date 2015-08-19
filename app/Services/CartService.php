@@ -228,6 +228,19 @@ class CartService implements CartServiceContract
 		throw new \App\Services\Exceptions\CouponNotFoundException();
 	}
 
+	public function addCouponByCode($couponCode)
+	{
+		// Get the Coupon from the Datastore
+		$coupon = $this->couponRepository->getByCode($couponCode);
+
+		// Verify if Coupon exists and try to add it
+		if($coupon != null)
+			return $this->addCoupon($coupon->id);
+
+		// Throw an Exception if we can't find the Coupon in the Datastore
+		throw new \App\Services\Exceptions\CouponNotFoundException();
+	}
+
 	/**
 	 * Remove a Discount Coupon from the Cart
 	 * @param  int $couponId

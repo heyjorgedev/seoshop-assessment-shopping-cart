@@ -11,4 +11,9 @@ class EloquentCouponRepository extends EloquentRepository implements CouponRepos
 	{
 		$this->model = $model;
 	}
+
+	public function getByCode($couponCode)
+	{
+		return $this->model->where('code', $couponCode)->first();
+	}
 }

@@ -14,5 +14,6 @@ interface CartServiceContract
 	public function removeProduct($productId, $quantity);
 
 	public function addCoupon($couponId);
+	public function addCouponByCode($couponCode);
 	public function removeCoupon($couponId);
 }

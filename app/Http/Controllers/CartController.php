@@ -54,9 +54,24 @@ class CartController extends Controller
 
     public function postAddDiscount(AddDiscountToCartRequest $request)
     {
-        // $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
-        // $this->cartRepo->add($id, $quantity);
-        return back()->withErrors([ 'message' => 'Teste']);
+        try
+        {
+            $this->cartService->addCouponByCode($request->get('code'));
+            return back();
+        }
+        catch(\App\Services\Exceptions\CouponAlreadyExistsException $e)
+        {
+            return back()->withErrors([ 'message' => 'This coupon code is already in your shopping cart.']);
+        }
+        catch(\App\Services\Exceptions\CouponNotFoundException $e)
+        {
+            return back()->withErrors([ 'message' => 'The coupon you provided to us is invalid. Try again.']);
+        }
+        catch(Exception $e)
+        {
+            // We should log this because this error is unexpected
+            return back()->withErrors([ 'message' => 'Something happened and we were unable to add this coupon code.']);
+        }
     }
 
     public function getCheckout()
