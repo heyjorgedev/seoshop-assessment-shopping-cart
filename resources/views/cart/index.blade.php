@@ -14,7 +14,10 @@
 		<h2 style="text-align: right;">Total: {{ $cart->total }}€</h2>
 
 		<div> <!-- TODO: Coupons -->
-
+			{!! Form::open([ 'url' => '']) !!}
+				<input class="form-control" type="text">
+				<button class="btn btn-default" type="submit">Add Coupon</button>
+			{!! Form::close() !!}
 		</div>
 
 		<div>
