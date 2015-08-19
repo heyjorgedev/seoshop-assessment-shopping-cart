@@ -13,7 +13,7 @@
 		
 		<div> <!-- TODO: Coupons -->
 			{!! Form::open([ 'url' => '', 'method' => 'POST']) !!}
-				<input class="form-control" style="float:left;width:200px;" placeholder="" type="text">
+				<input class="form-control" style="float:left;width:200px;text-transform: uppercase;" placeholder="" type="text">
 				<button class="btn btn-primary" style="float:left; margin-left:-1px;" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>
