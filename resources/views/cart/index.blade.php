@@ -1,8 +1,19 @@
 @extends('layouts.main')
 
 @section('content')
+
+	@if(!$errors->isEmpty())
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		
+		{{ $errors->first('message') }}
+
+	</div>
+	@endif
+
 	<h1 style="margin-bottom: 30px;">My Cart</h1>
-	
+
 	@if(empty($cart->products))
 		<p>You have no items in your shopping cart.</p>
 	@else
@@ -12,8 +23,8 @@
 		@include('cart.partials.discounts-table', [ 'discounts' => $cart->discounts])
 		
 		<div> <!-- TODO: Coupons -->
-			{!! Form::open([ 'url' => '', 'method' => 'POST']) !!}
-				<input class="form-control" style="float:left;width:200px;text-transform: uppercase;" placeholder="" type="text">
+			{!! Form::open([ 'url' => action('CartController@postAddDiscount') , 'method' => 'POST']) !!}
+				<input class="form-control" name="code" style="float:left;width:200px;text-transform: uppercase;" placeholder="" type="text">
 				<button class="btn btn-primary" style="float:left; margin-left:-1px;" type="submit">Add Coupon</button>
 			{!! Form::close() !!}
 		</div>

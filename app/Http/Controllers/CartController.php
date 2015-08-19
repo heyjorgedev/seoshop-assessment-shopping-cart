@@ -52,11 +52,11 @@ class CartController extends Controller
         return back();
     }
 
-    public function postAddDiscount($id, AddDiscountToCartRequest $request)
+    public function postAddDiscount(AddDiscountToCartRequest $request)
     {
         // $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
         // $this->cartRepo->add($id, $quantity);
-        // return back();
+        return back()->withErrors([ 'message' => 'Teste']);
     }
 
     public function getCheckout()

@@ -6,7 +6,8 @@
 .thumbnail,
 .well,
 .btn,
-.form-control
+.form-control,
+.alert
 {
 	border-radius: 0;
 }
