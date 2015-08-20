@@ -101,6 +101,10 @@ class CartController extends Controller
 
     public function getCheckout()
     {
-        return view('cart.checkout');
+        // if($this->cartService->getProductsCount() == 0)
+        //     return redirect()->action('CartController@getIndex');
+
+        $cart = $this->cartService->get();
+        return view('cart.checkout', compact('cart'));
     }
 }
