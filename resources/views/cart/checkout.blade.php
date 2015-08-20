@@ -10,16 +10,25 @@
 	@include('cart.partials.cart', ['preview' => true])
 </div>
 
-{!! Form::open([]) !!}
+<div>
+@if($errors->has())
+<ul style="color:red;">
+	@foreach($errors->all() as $error)
+	<li>{{ $error }}</li>	
+	@endforeach
+</ul>
+@endif
+</div>
+{!! Form::open([ 'action' => 'CartController@postCompleted']) !!}
 <h1>Customer Details</h1>
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Email</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('email', 'Email*') !!}
+			{!! Form::email('email', null, [ 'class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Title</label>
+			{!! Form::label('title', 'Title*') !!}
 			<select class="form-control">
 				<option>Mr</option>
 				<option>Mrs</option>
@@ -27,16 +36,16 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">First Name</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('firstName', 'First Name*') !!}
+			{!! Form::text('firstName', null, [ 'class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Last Name</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('lastName', 'Last Name*') !!}
+			{!! Form::text('lastName', null, [ 'class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Phone Number</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('phoneNumber', 'Phone Number') !!}
+			{!! Form::text('phoneNumber', null, [ 'class' => 'form-control']) !!}
 		</div>
 	</div>
 </div>
@@ -45,11 +54,11 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Address</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('shippingAddress', 'Shipping Address*') !!}
+			{!! Form::text('shippingAddress', null, [ 'class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Country</label>
+			{!! Form::label('shippingCountry', 'Country*') !!}
 			<select class="form-control">
 				<option>Portugal</option>
 				<option>Spain</option>
@@ -57,12 +66,12 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">City</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('shippingCity', 'City*') !!}
+			{!! Form::text('shippingCity', null, [ 'class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			<label for="inputEmail3" class="control-label">Postal Code</label>
-			<input type="email" class="form-control" id="inputEmail3">
+			{!! Form::label('shippingPostalCode', 'Postal Code*') !!}
+			{!! Form::text('shippingPostalCode', null, [ 'class' => 'form-control']) !!}
 		</div>
 	</div>
 </div>

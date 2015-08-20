@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Contracts\CartServiceContract;
 use App\Http\Requests\AddOrRemoveProductToCartRequest;
 use App\Http\Requests\AddDiscountToCartRequest;
+use App\Http\Requests\CheckoutOrderRequest;
 
 class CartController extends Controller
 {
@@ -61,6 +62,7 @@ class CartController extends Controller
     {
         try
         {
+            // Tries to add a coupon to the cart
             $this->cartService->addCouponByCode($request->get('code'));
             session()->flash('message', $request->get('code').' was added to the cart');
             return back();
@@ -107,4 +109,19 @@ class CartController extends Controller
         $cart = $this->cartService->get();
         return view('cart.checkout', compact('cart'));
     }
-}
+
+    public function postCompleted(CheckoutOrderRequest $request)
+    {
+        $requestParams = $request->only(
+            'email', 
+            'firstName', 
+            'lastName', 
+            'shippingAddress', 
+            'shippingCountry', 
+            'shippingCity',
+            'shippingPostalCode'
+        );
+
+        return view('cart.completed', compact('requestParams'));
+    }
+} 
