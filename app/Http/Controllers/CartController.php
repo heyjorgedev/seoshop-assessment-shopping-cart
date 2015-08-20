@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\CartServiceContract;
-use App\Http\Requests\AddProductToCartRequest;
+use App\Http\Requests\AddOrRemoveProductToCartRequest;
 use App\Http\Requests\AddDiscountToCartRequest;
 
 class CartController extends Controller
@@ -28,7 +28,7 @@ class CartController extends Controller
     	return view('cart.index', compact('cart'));
     }
 
-    public function postAdd($id, AddProductToCartRequest $request)
+    public function postAdd($id, AddOrRemoveProductToCartRequest $request)
     {
         // Get the Quantity from the POST request.
         $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
@@ -40,7 +40,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function postRemove($id, AddProductToCartRequest $request)
+    public function postRemove($id, AddOrRemoveProductToCartRequest $request)
     {
         // Get the Quantity from the POST request.
         $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
@@ -67,10 +67,28 @@ class CartController extends Controller
         {
             return back()->withErrors([ 'message' => 'The coupon you provided to us is invalid. Try again.']);
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             // We should log this because this error is unexpected
             return back()->withErrors([ 'message' => 'Something happened and we were unable to add this coupon code.']);
+        }
+    }
+
+    public function postRemoveDiscount($id)
+    {
+        try
+        {
+            $this->cartService->removeCoupon($id);
+            return back();
+        }
+        catch(\App\Services\Exceptions\CouponNotFoundException $e)
+        {
+            return back()->withErrors([ 'message' => 'We didnt find this discount coupon in your cart.']);
+        }
+        catch(\Exception $e)
+        {
+            // We should log this because this error is unexpected
+            return back()->withErrors([ 'message' => 'Something happened and we were unable to remove this discount coupon from your cart.']);
         }
     }
 

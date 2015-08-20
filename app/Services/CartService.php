@@ -278,6 +278,6 @@ class CartService implements CartServiceContract
 		}
 
 		// If we cant find it we dont need to take any action
-		return false;
+		throw new \App\Services\Exceptions\CouponNotFoundException();
 	}
 }
