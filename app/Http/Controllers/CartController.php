@@ -105,7 +105,9 @@ class CartController extends Controller
     public function getCheckout()
     {
         if($this->cartService->getProductsCount() == 0)
-            return redirect()->action('CartController@getIndex');
+            return redirect()
+                ->action('CartController@getIndex')
+                ->withErrors([ 'message' => 'You have no products to checkout']);
 
         $cart = $this->cartService->get();
         return view('cart.checkout', compact('cart'));
