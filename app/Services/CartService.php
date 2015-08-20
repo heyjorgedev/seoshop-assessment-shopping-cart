@@ -134,22 +134,22 @@ class CartService implements CartServiceContract
 			$total += $product->getSubTotal();
 		}
 
-		// @todo: Go to each discount and calculate the value
+		// Get the Discounts
 		$discounts = $this->getDiscounts();
 		
-		// First the value discounts
+		// First calculate the value discounts
 		foreach($discounts as $discount)
 		{
-			if($discount->is_percentage == false)
+			if($discount->isPercentage == false)
 			{
 				$total -= $discount->value;
 			}
 		}
 
-		// Second the percentage discounts
+		// Second calculate the percentage discounts
 		foreach($discounts as $discount)
 		{
-			if($discount->is_percentage)
+			if($discount->isPercentage)
 			{
 				$total -= ($total * ($discount->value / 100));
 			}
