@@ -23,7 +23,7 @@
 			</div>
 			{!! Form::open([ 'url' => action('CartController@postAdd', ['id' => $product->id])]) !!}
 			<div class="form-numeric-value-group">
-				<input type="text" class="form-control numeric" name="quantity" value="1">
+				<input type="text" class="form-control numeric" disabled name="quantity" value="1">
 				<div class="buttons">
 					<a class="button" href="#">+</a>
 					<a class="button" href="#">-</a>
