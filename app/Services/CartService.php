@@ -203,7 +203,18 @@ class CartService implements CartServiceContract
 	 */
 	public function removeProduct($productId, $quantity)
 	{
-		if($this->cartRepository->hasProduct($productId) == false) return false;
+		if($this->cartRepository->hasProduct($productId) == false)
+			throw new \App\Services\Exceptions\ProductNotFoundException();
+
+		if(is_null($quantity))
+		{
+			$this->cartRepository->removeProduct($productId);
+
+			if($this->getProductsCount() == 0)
+				$this->cartRepository->clearDiscountCoupons();
+
+			return true;
+		}
 
 		$newQuantity = $this->cartRepository->getProductQuantity($productId) - $quantity;
 
