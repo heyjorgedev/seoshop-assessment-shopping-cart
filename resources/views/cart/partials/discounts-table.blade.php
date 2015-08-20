@@ -5,7 +5,9 @@
 	<thead>
 		<td>Coupon</td>
 		<td>Discount</td>
+		@if($preview != true)
 		<td style="width: 100px;"></td>
+		@endif
 	</thead>
 	<tbody>
 		@foreach($discounts as $discount)
@@ -18,11 +20,13 @@
 			<td>{{ $discount->value }}€</td>
 			@endif
 
+			@if($preview != true)
 			<td>
 				{!! Form::open([ 'url' => action('CartController@postRemoveDiscount', [ 'id' => $discount->couponId ])]) !!}
 					<button type="submit" class="btn btn-danger">Remove</button>
 				{!! Form::close() !!}
 			</td>
+			@endif
 		</tr>
 		@endforeach
 	</tbody>
