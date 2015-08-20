@@ -10,7 +10,7 @@
 	<script src="{{ asset('js/jquery.texttailor.min.js') }}"></script>
 	<script src="{{ asset('js/jquery.custom.js') }}"></script>
 </head>
-<body style="padding-top: 70px;">
+<body style="padding-top: 70px;padding-bottom: 70px;">
 	@include('partials.navbar')
 
 	<div class="container">

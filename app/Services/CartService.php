@@ -105,12 +105,17 @@ class CartService implements CartServiceContract
 	 */
 	public function getDiscounts()
 	{
-		if(isset($this->discounts)) return $this->discounts;
-		else $this->discounts = [];
+		$discountsArray = [];
 
-		// @todo: 
+		$coupons = $this->couponRepository->getIn($this->cartRepository->getDiscounts());
 
-		return $this->discounts;
+		foreach($coupons as $coupon)
+		{
+			$cartDiscount = CartDiscount::create($coupon->id, $coupon->code, $coupon->discount, $coupon->is_percentage);
+			array_push($discountsArray, $cartDiscount);
+		}
+
+		return $discountsArray;
 	}
 
 	/**
