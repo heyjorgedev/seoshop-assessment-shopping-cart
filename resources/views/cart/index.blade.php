@@ -5,7 +5,7 @@
 	<h1 style="margin-bottom: 30px;">My Cart</h1>
 
 	@include('cart.partials.validation')
-	@include('cart.partials.cart')
+	@include('cart.partials.cart', ['preview' => false])
 	
 @stop
 
