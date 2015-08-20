@@ -27,4 +27,11 @@ class AddDiscountToCartRequest extends Request
             'code' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'code.required' => 'The Coupon Code is required.',
+        ];
+    }
 }
