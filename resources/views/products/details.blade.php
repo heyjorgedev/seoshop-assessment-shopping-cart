@@ -43,26 +43,25 @@
 		ellipsis: true,
 	});
 
-	$('.numeric').numeric(1);
-
 	function changeQuantity(variant)
 	{
+		debugger;
 		var el = $('#quantity');
-		var value = $(el).val();
+		var value = parseInt($(el).attr('value'));
 
 		if(variant === 'up')
 		{
-			value++;
+			$(el).attr('value', value + 1);
 		}
 		else if(variant === 'down')
 		{
 			if(value <= 1)
 			{
-				$(el).val(1);
+				$(el).attr('value', 1);
 				return;
 			}
 
-			$(el).val(value-1);
+			$(el).attr('value', value - 1);
 		}
 	}
 </script>
