@@ -7,6 +7,7 @@ use App\Repositories\Contracts\CartRepositoryContract;
 use App\Repositories\Contracts\ProductRepositoryContract;
 use App\Repositories\Contracts\CouponRepositoryContract;
 use App\Models\Cart\CartItem;
+use App\Models\Cart\CartDiscount;
 
 /**
  * This layer is responsible to manage the cart logic like:
