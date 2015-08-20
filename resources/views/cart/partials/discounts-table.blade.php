@@ -7,14 +7,18 @@
 		<td>Discount</td>
 	</thead>
 	<tbody>
+		@foreach($discounts as $discount)
 		<tr>
-			<td>TEST</td>
-			<td>12.00€</td>
+			<td>{{ $discount->couponCode }}</td>
+
+			@if($discount->isPercentage)
+			<td>{{ $discount->value }}%</td>
+			@else
+			<td>{{ $discount->value }}€</td>
+			@endif
+
 		</tr>
-		<tr>
-			<td>TECH</td>
-			<td>10.00%</td>
-		</tr>
+		@endforeach
 	</tbody>
 </table>
 
