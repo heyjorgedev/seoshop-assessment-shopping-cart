@@ -123,12 +123,12 @@ class CartController extends Controller
             'shippingPostalCode'
         );
 
-        $products = $this->cartService->get()->products;
+        $cart = $this->cartService->get();
         // Here we could add the order to the datastore
-        
+
         // Clear the Cart to start a new Order
         $this->cartService->clear();
 
-        return view('cart.completed', compact('products', 'requestParams'));
+        return view('cart.completed', compact('cart', 'requestParams'));
     }
 } 

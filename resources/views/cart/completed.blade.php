@@ -4,6 +4,6 @@
 
 <h1 style="color:green;">Order Completed!</h1>
 
-@include('cart.partials.products-table', [[ 'products' => $products, 'preview' => true])
+@include('cart.partials.cart', [ 'products' => $cart, 'preview' => true])
 
 @stop
