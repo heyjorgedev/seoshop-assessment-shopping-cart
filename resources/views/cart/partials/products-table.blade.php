@@ -4,7 +4,7 @@
 				<td>Quantity</td>
 				<td>Unit Price</td>
 				<td>Subtotal</td>
-				<td></td>
+				<td style="width: 110px;"></td>
 			</thead>
 			<tbody>
 				@foreach($products as $product)
