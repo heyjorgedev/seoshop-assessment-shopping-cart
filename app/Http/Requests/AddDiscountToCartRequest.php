@@ -31,7 +31,7 @@ class AddDiscountToCartRequest extends Request
     public function messages()
     {
         return [
-            'code.required' => 'The Coupon Code is required.',
+            'code.required' => 'The Coupon Code field cannot be empty.',
         ];
     }
 }
