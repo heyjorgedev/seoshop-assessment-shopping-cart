@@ -43,7 +43,7 @@ class CartController extends Controller
     public function postRemove($id, AddOrRemoveProductToCartRequest $request)
     {
         // Get the Quantity from the POST request.
-        $quantity = $request->has('quantity') ? $request->get('quantity') : 1;
+        $quantity = $request->has('quantity') ? $request->get('quantity') : null;
 
         // Call the Cart Service to remove this item from the Cart
         $this->cartService->removeProduct($id, $quantity);

@@ -26,6 +26,11 @@
 								
 							</div>
 						</div>
+
+						{!! Form::open([ 'url' => action('CartController@postRemove', ['id' => $product->productId])]) !!}
+							<button type="submit" class="btn btn-danger" href="#">Remove Product</button>
+						{!! Form::close() !!}
+
 					</td>
 					<td>{{ $product->unitPrice }}€</td>
 					<td>{{ $product->getSubTotal() }}€</td>
