@@ -24,7 +24,7 @@ class AddOrRemoveProductToCartRequest extends Request
     public function rules()
     {
         return [
-            'quantity' => 'numeric'
+            'quantity' => 'integer'
         ];
     }
 }
