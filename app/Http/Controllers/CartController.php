@@ -86,6 +86,7 @@ class CartController extends Controller
     {
         try
         {
+            // try to remove a coupon from the cart
             $this->cartService->removeCoupon($id);
             session()->flash('message', 'Coupon removed from the cart');
             return back();
@@ -121,6 +122,8 @@ class CartController extends Controller
             'shippingCity',
             'shippingPostalCode'
         );
+
+        // Here we could add the order to the datastore
 
         return view('cart.completed', compact('requestParams'));
     }
