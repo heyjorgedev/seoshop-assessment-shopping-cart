@@ -135,10 +135,25 @@ class CartService implements CartServiceContract
 		}
 
 		// @todo: Go to each discount and calculate the value
+		$discounts = $this->getDiscounts();
 		
 		// First the value discounts
-		
+		foreach($discounts as $discount)
+		{
+			if($discount->is_percentage == false)
+			{
+				$total -= $discount->value;
+			}
+		}
+
 		// Second the percentage discounts
+		foreach($discounts as $discount)
+		{
+			if($discount->is_percentage)
+			{
+				$total -= ($total * ($discount->value / 100));
+			}
+		}
 
 		// I could use a ternary operator here like the one commented below
 		// but its harder to read than a simple IF Statement
