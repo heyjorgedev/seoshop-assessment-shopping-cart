@@ -125,6 +125,9 @@ class CartController extends Controller
 
         // Here we could add the order to the datastore
 
+        // Clear the Cart to start a new Order
+        $this->cartService->clear();
+
         return view('cart.completed', compact('requestParams'));
     }
 } 

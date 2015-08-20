@@ -111,9 +111,20 @@ class SessionCartRepository implements CartRepositoryContract
 		return in_array($couponId, $this->session->get('cart.discounts', []));
 	}
 
+	/**
+	 * Clear all the discounts from the cart
+	 */
 	public function clearDiscountCoupons()
 	{
 		$this->session->forget('cart.discounts');
+	}
+
+	/**
+	 * Clear all the products from the cart
+	 */
+	public function clearProducts()
+	{
+		$this->session->forget('cart.products');
 	}
 
 	private function getProductSessionKey($productId)

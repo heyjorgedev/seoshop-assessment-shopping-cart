@@ -291,4 +291,10 @@ class CartService implements CartServiceContract
 		// If we cant find it we dont need to take any action
 		throw new \App\Services\Exceptions\CouponNotFoundException();
 	}
+
+	public function clear()
+	{
+		$this->cartRepository->clearProducts();
+		$this->cartRepository->clearDiscountCoupons();
+	}
 }

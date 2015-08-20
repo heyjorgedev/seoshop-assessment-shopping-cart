@@ -19,4 +19,5 @@ interface CartRepositoryContract
 	public function getProductQuantity($productId);
 
 	public function clearDiscountCoupons();
+	public function clearProducts();
 }
