@@ -5,7 +5,7 @@
 <a href="{{ action('CartController@getIndex') }}" class="btn btn-default" role="button">&lt; Back to Shopping Cart</a>
 </div>
 
-<h1>You'll pay: {{ $cart->total }}€</h1>
+<h1>Review your order</h1>
 <div>
 	@include('cart.partials.cart', ['preview' => true])
 </div>

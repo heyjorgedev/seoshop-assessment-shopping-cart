@@ -5,9 +5,9 @@
 		<p>You have no items in your shopping cart.</p>
 	@else
 		
-		@include('cart.partials.products-table', [ 'products' => $cart->products])
+		@include('cart.partials.products-table', [ 'products' => $cart->products, 'preview' => $preview])
 		
-		@include('cart.partials.discounts-table', [ 'discounts' => $cart->discounts])
+		@include('cart.partials.discounts-table', [ 'discounts' => $cart->discounts, 'preview' => $preview])
 		
 		@if($preview != true)
 		<div>
@@ -27,5 +27,5 @@
 			<a href="{{ action('CartController@getCheckout') }}" class="btn btn-lg btn-success">Checkout</a>
 		</div>
 		@endif
-		
+
 	@endif
