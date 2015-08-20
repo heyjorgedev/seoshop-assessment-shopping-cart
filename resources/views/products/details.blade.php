@@ -23,10 +23,10 @@
 			</div>
 			{!! Form::open([ 'url' => action('CartController@postAdd', ['id' => $product->id])]) !!}
 			<div class="form-numeric-value-group">
-				<input type="text" class="form-control numeric" disabled name="quantity" value="1">
+				<input type="text" class="form-control numeric" disabled id="quantity" name="quantity" value="1">
 				<div class="buttons">
-					<a class="button" href="#">+</a>
-					<a class="button" href="#">-</a>
+					<a class="button" onclick="changeQuantity('up');" href="#up">+</a>
+					<a class="button" onclick="changeQuantity('down');" href="#down">-</a>
 				</div>
 			</div>
 			<button style="float:left;margin-left:10px;" type="submit" class="btn btn-success" href="#">Add to Cart</button>
@@ -44,5 +44,26 @@
 	});
 
 	$('.numeric').numeric(1);
+
+	function changeQuantity(variant)
+	{
+		var el = $('#quantity');
+		var value = $(el).val();
+
+		if(variant === 'up')
+		{
+			value++;
+		}
+		else if(variant === 'down')
+		{
+			if(value <= 1)
+			{
+				$(el).val(1);
+				return;
+			}
+
+			$(el).val(value-1);
+		}
+	}
 </script>
 @stop
