@@ -5,7 +5,7 @@
 	<thead>
 		<td>Coupon</td>
 		<td>Discount</td>
-		<td></td>
+		<td style="width: 100px;"></td>
 	</thead>
 	<tbody>
 		@foreach($discounts as $discount)
@@ -20,7 +20,7 @@
 
 			<td>
 				{!! Form::open([ 'url' => action('CartController@postRemoveDiscount', [ 'id' => $discount->couponId ])]) !!}
-					<button type="submit" class="btn btn-danger">Delete</button>
+					<button type="submit" class="btn btn-danger">Remove</button>
 				{!! Form::close() !!}
 			</td>
 		</tr>
