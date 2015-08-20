@@ -12,7 +12,7 @@ use App\Http\Requests\CheckoutOrderRequest;
 
 class CartController extends Controller
 {
-    protected $cartRepo;
+    // Services
 	protected $cartService;
 
 	public function __construct(CartServiceContract $cartService)

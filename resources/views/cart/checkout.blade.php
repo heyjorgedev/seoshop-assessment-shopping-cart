@@ -29,10 +29,10 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('title', 'Title*') !!}
-			<select class="form-control">
-				<option>Mr</option>
-				<option>Mrs</option>
-				<option>Miss</option>
+			<select name="title" class="form-control">
+				<option value="Mr">Mr</option>
+				<option value="Mrs">Mrs</option>
+				<option value="Miss">Miss</option>
 			</select>
 		</div>
 		<div class="form-group">
@@ -59,10 +59,10 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('shippingCountry', 'Country*') !!}
-			<select class="form-control">
-				<option>Portugal</option>
-				<option>Spain</option>
-				<option>Netherlands</option>
+			<select name="shippingCountry" class="form-control">
+				<option value="Portugal">Portugal</option>
+				<option value="Spain">Spain</option>
+				<option value="Netherlands">Netherlands</option>
 			</select>
 		</div>
 		<div class="form-group">
