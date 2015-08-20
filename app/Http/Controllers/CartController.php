@@ -36,6 +36,8 @@ class CartController extends Controller
         // Call the Cart Service to add this item to the Cart
         $this->cartService->addProduct($id, $quantity);
 
+        session()->flash('message', 'Product was added to the cart');
+
         // Return the user Back
         return back();
     }
@@ -47,6 +49,9 @@ class CartController extends Controller
 
         // Call the Cart Service to remove this item from the Cart
         $this->cartService->removeProduct($id, $quantity);
+        
+        if(is_null($quantity))
+            session()->flash('message', 'Product was removed from the cart');
 
         // Return the user Back
         return back();
@@ -57,6 +62,7 @@ class CartController extends Controller
         try
         {
             $this->cartService->addCouponByCode($request->get('code'));
+            session()->flash('message', $request->get('code').' was added to the cart');
             return back();
         }
         catch(\App\Services\Exceptions\CouponAlreadyExistsException $e)
@@ -79,6 +85,7 @@ class CartController extends Controller
         try
         {
             $this->cartService->removeCoupon($id);
+            session()->flash('message', 'Coupon removed from the cart');
             return back();
         }
         catch(\App\Services\Exceptions\CouponNotFoundException $e)
